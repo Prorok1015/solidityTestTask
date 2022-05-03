@@ -24,5 +24,9 @@ module.exports = {
         runs: 200
       }
     }
+  },
+  mocha: {
+    timeout: 40000,
+    parallel: true
   }
 };

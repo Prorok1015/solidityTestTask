@@ -1,15 +1,14 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
-describe("Voit", function () {
+describe("Voit Manager", function () {
   let owner;
   let user1;
-  let user2;
   let candidats = [];
   let voitManager;
 
   beforeEach(async function () {
-    [owner, user1, user2, candidats[0], candidats[1], candidats[2]] = await ethers.getSigners();
+    [owner, user1, , candidats[0], candidats[1], candidats[2]] = await ethers.getSigners();
 
     const voitManagerContract = await ethers.getContractFactory("VoitManager", owner);
     voitManager = await voitManagerContract.deploy();
@@ -43,6 +42,6 @@ describe("Voit", function () {
     await voitManager.createVoit("new 1", candidats);
     const _voit = await voitManager.lastvoit();
     const voits = await voitManager.getVoits();
-    expect(_voit).to.eq(voits[0]);
+    expect(_voit).to.eq(voits[0].voit);
   });
 });
