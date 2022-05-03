@@ -94,7 +94,7 @@ contract VoitManager
 {
     address public owner;
     address myAddress;
-
+    address public lastvoit;
     Voit[] m_lstVoits;
 
     modifier onlyOwner {
@@ -107,14 +107,11 @@ contract VoitManager
         myAddress = address(this);
     }
 
-    receive() external payable {}
-
-    function pay() external payable {}
-    
-    function createVoit(string memory _name, address[] memory candidats) external payable onlyOwner returns(Voit){
+    function createVoit(string memory _name, address[] memory candidats) external onlyOwner returns(address){
         Voit newVoit = new Voit(_name, candidats);
         m_lstVoits.push(newVoit);
-        return newVoit;
+        lastvoit = address(newVoit);
+        return lastvoit;
     }
 
     function getVoits() external view returns(Voit[] memory) {
